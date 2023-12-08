@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fruit_ordering_app/view/dashboard.dart';
 import 'package:fruit_ordering_app/view/register.dart';
-import 'package:fruit_ordering_app/dashboard.dart';
 
 class MyLogin extends StatefulWidget {
   const MyLogin({Key? key}) : super(key: key);
@@ -28,7 +28,9 @@ class _MyLoginState extends State<MyLogin> {
               child: const Text(
                 'Login\nTo Your \n Account',
                 style: TextStyle(
-                    color: Colors.white, fontSize: 33, fontFamily: 'Roboto'),
+                  color: Colors.white,
+                  fontSize: 33,
+                ),
               ),
             ),
             SingleChildScrollView(
@@ -77,7 +79,7 @@ class _MyLoginState extends State<MyLogin> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const DashboardScreen()),
+                                            const Dashboard()),
                                   );
                                 },
                                 style: ElevatedButton.styleFrom(
