@@ -11,18 +11,16 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Container(
-        width:double.infinity,
-        height:double.infinity,
-        decoration:BoxDecoration(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin:Alignment.topRight,
-            end:Alignment.bottomRight,
-            colors:[
+            begin: Alignment.topRight,
+            end: Alignment.bottomRight,
+            colors: [
               Color(0xFFFF8008),
               Color(0xFFCE1010),
-
             ],
           ),
         ),
@@ -30,19 +28,15 @@ class _SplashScreenState extends State<SplashScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            
             Image.asset(
-              'assets/images/pizza.png',
-              height:300.0,
-              width:300.0,
-
+              'assets/images/',
+              height: 300.0,
+              width: 300.0,
             ),
-            Text(
-              "A whole food app\n att your fingertips"
-            )
+            const Text("A whole fruit app\n att your fingertips")
           ],
         ),
       ),
     );
   }
-} 
+}
