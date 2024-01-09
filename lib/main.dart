@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:fruit_ordering_app/app/app.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fruit_ordering_app/core/app.dart';
+import 'package:fruit_ordering_app/core/network/hive_service.dart';
 
-void main() {
-  runApp(const App());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await HiveService().init();
+  runApp(
+    const ProviderScope(
+      child: App(),
+    ),
+  );
 }
