@@ -1,4 +1,3 @@
-import 'package:fruit_ordering_app/features/auth/presentation/view/login_view.dart';
 import 'package:fruit_ordering_app/features/auth/presentation/view/login_view_sec.dart';
 import 'package:fruit_ordering_app/features/auth/presentation/view/register_view.dart';
 import 'package:fruit_ordering_app/features/home/presentation/view/bottom_navigation/dashboard.dart';
@@ -19,7 +18,7 @@ class AppRoute {
       splashRoute: (context) => const SplashView(),
       dashboardRoute: (context) => const DashboardView(),
       myloginRoute: (context) => const MyLoginView(),
-      loginRoute: (context) => const MyLogin(),
+      loginRoute: (context) => const MyLoginView(),
       registerRoute: (context) => const MyRegister(),
     };
   }

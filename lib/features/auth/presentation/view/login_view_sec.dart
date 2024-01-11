@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fruit_ordering_app/core/common/snackbar/my_snackbar.dart';
 import 'package:fruit_ordering_app/core/routes/app_router.dart';
 import 'package:fruit_ordering_app/features/auth/presentation/view_model/auth_viewmodel.dart';
 
@@ -7,10 +8,10 @@ class MyLoginView extends ConsumerStatefulWidget {
   const MyLoginView({super.key});
 
   @override
-  ConsumerState<MyLoginView> createState() => _LoginViewState();
+  ConsumerState<MyLoginView> createState() => _MyLoginViewState();
 }
 
-class _LoginViewState extends ConsumerState<MyLoginView> {
+class _MyLoginViewState extends ConsumerState<MyLoginView> {
   final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -19,7 +20,12 @@ class _LoginViewState extends ConsumerState<MyLoginView> {
   @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authViewModelProvider);
-
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (authState.showMessage! && authState.error != null) {
+        showSnackBar(message: 'Invalid Credentials', context: context);
+        ref.read(authViewModelProvider.notifier).resetMessage(false);
+      }
+    });
     return Scaffold(
       body: SafeArea(
         child: Form(
@@ -76,8 +82,11 @@ class _LoginViewState extends ConsumerState<MyLoginView> {
                         if (_formKey.currentState!.validate()) {
                           await ref
                               .read(authViewModelProvider.notifier)
-                              .loginUser(context, _usernameController.text,
-                                  _passwordController.text);
+                              .loginUser(
+                                context,
+                                _usernameController.text,
+                                _passwordController.text,
+                              );
                         }
                       },
                       child: const SizedBox(
