@@ -11,7 +11,7 @@ class AuthApiModel {
   final String fullname;
   final String location;
   final String phonenum;
-  final String username;
+  final String email;
   final String? password;
 
   AuthApiModel({
@@ -19,8 +19,8 @@ class AuthApiModel {
     required this.fullname,
     required this.location,
    required this.phonenum,
-     required this.username,
-    this.password,
+     required this.email,
+    required this.password,
   });
 
   factory AuthApiModel.fromJson(Map<String, dynamic> json) =>
@@ -37,7 +37,7 @@ class AuthApiModel {
      
       phonenum: apiModel.phonenum,
       
-      username: apiModel.username,
+      email: apiModel.email,
       password: apiModel.password,
     );
   }
@@ -49,7 +49,7 @@ class AuthApiModel {
       fullname: entity.fullname,
       location: entity.location,
       phonenum: entity.phonenum,
-      username: entity.username,
+      email: entity.email,
       password: entity.password,
     );
   }

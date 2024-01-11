@@ -13,19 +13,19 @@ class MyRegister extends ConsumerStatefulWidget {
 }
 
 class _MyRegisterState extends ConsumerState<MyRegister> {
-  final _gap = const SizedBox(height: 8);
-
   final _key = GlobalKey<FormState>();
-  final _fullnameController = TextEditingController(text: '');
-  final _locationController = TextEditingController(text: '');
-  final _phonenumController = TextEditingController(text: '');
-  final _usernameController = TextEditingController(text: '');
-  final _passwordController = TextEditingController(text: '');
+  final _fullnameController = TextEditingController();
+  final _locationController = TextEditingController();
+  final _phonenumController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   bool isObscure = true;
 
   @override
   Widget build(BuildContext context) {
+    const gap = SizedBox(height: 20);
+
     final isConnected = ref.watch(connectivityStatusProvider);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (isConnected == ConnectivityStatus.isDisconnected) {
@@ -61,7 +61,10 @@ class _MyRegisterState extends ConsumerState<MyRegister> {
                 children: [
                   TextFormField(
                     controller: _fullnameController,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
+                      fillColor: Colors.grey.shade100,
+                      filled: true,
+                      border: const OutlineInputBorder(),
                       labelText: 'Full Name',
                     ),
                     validator: ((value) {
@@ -71,10 +74,13 @@ class _MyRegisterState extends ConsumerState<MyRegister> {
                       return null;
                     }),
                   ),
-                  _gap,
+                  gap,
                   TextFormField(
                     controller: _locationController,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
+                      fillColor: Colors.grey.shade100,
+                      filled: true,
+                      border: const OutlineInputBorder(),
                       labelText: 'Location',
                     ),
                     validator: ((value) {
@@ -84,10 +90,13 @@ class _MyRegisterState extends ConsumerState<MyRegister> {
                       return null;
                     }),
                   ),
-                  _gap,
+                  gap,
                   TextFormField(
                     controller: _phonenumController,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
+                      fillColor: Colors.grey.shade100,
+                      filled: true,
+                      border: const OutlineInputBorder(),
                       labelText: 'Phone Num',
                     ),
                     validator: ((value) {
@@ -97,24 +106,30 @@ class _MyRegisterState extends ConsumerState<MyRegister> {
                       return null;
                     }),
                   ),
-                  _gap,
+                  gap,
                   TextFormField(
-                    controller: _usernameController,
-                    decoration: const InputDecoration(
-                      labelText: 'Username',
+                    controller: _emailController,
+                    decoration: InputDecoration(
+                      fillColor: Colors.grey.shade100,
+                      filled: true,
+                      border: const OutlineInputBorder(),
+                      labelText: 'Email',
                     ),
                     validator: ((value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter username';
+                        return 'Please enter email';
                       }
                       return null;
                     }),
                   ),
-                  _gap,
+                  gap,
                   TextFormField(
                     controller: _passwordController,
                     obscureText: isObscure,
                     decoration: InputDecoration(
+                      fillColor: Colors.grey.shade100,
+                      filled: true,
+                      border: const OutlineInputBorder(),
                       labelText: 'Password',
                       suffixIcon: IconButton(
                         icon: Icon(
@@ -134,9 +149,9 @@ class _MyRegisterState extends ConsumerState<MyRegister> {
                       return null;
                     }),
                   ),
-                  _gap,
+                  gap,
                   SizedBox(
-                    width: double.infinity,
+                    width: 300,
                     child: ElevatedButton(
                       onPressed: () {
                         if (_key.currentState!.validate()) {
@@ -144,7 +159,7 @@ class _MyRegisterState extends ConsumerState<MyRegister> {
                             fullname: _fullnameController.text.trim(),
                             location: _locationController.text.trim(),
                             phonenum: _phonenumController.text.trim(),
-                            username: _usernameController.text,
+                            email: _emailController.text,
                             password: _passwordController.text,
                           );
                           // Register user
@@ -153,7 +168,22 @@ class _MyRegisterState extends ConsumerState<MyRegister> {
                               .registerUser(entity);
                         }
                       },
-                      child: const Text('Registerr'),
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.black, // Set the text color
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 16.0,
+                            horizontal: 10.0), // Set the button padding
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                              100.100), // Set the button border radius
+                        ),
+                      ),
+                      child: const Text('Registerr',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                          )),
                     ),
                   ),
                 ],

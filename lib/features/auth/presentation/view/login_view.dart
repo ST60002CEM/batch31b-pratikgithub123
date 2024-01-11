@@ -20,128 +20,118 @@ class _MyLoginState extends State<MyLogin> {
           backgroundColor: const Color.fromARGB(255, 73, 192, 215),
           elevation: 0,
         ),
-        body: Stack(
+        body: Column(
           children: [
-            Container(),
-            Container(
-              padding: const EdgeInsets.only(left: 35, top: 130),
-              child: const Text(
-                'Login\nTo Your \n Account',
+            const SizedBox(
+              height: 10,
+              child: Text(
+                "Login TO Your Account",
                 style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 33,
+                  height: 10,
                 ),
               ),
             ),
-            SingleChildScrollView(
+            // Container(
+            //   padding: const EdgeInsets.only(left: 10, top: 10),
+            //   height: 50,
+            //   width: 50,
+            //   child: Image.asset('assets/images/basket.png'),
+            // ),
+
+            Container(
+              
               child: Container(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.5),
+                margin: const EdgeInsets.only(left: 35, right: 35),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      margin: const EdgeInsets.only(left: 35, right: 35),
-                      child: Column(
-                        children: [
-                          TextField(
-                            style: const TextStyle(color: Colors.black),
-                            decoration: InputDecoration(
-                                fillColor: Colors.grey.shade100,
-                                filled: true,
-                                hintText: "Email",
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                )),
+                    TextField(
+                      style: const TextStyle(color: Colors.black),
+                      decoration: InputDecoration(
+                          fillColor: Colors.grey.shade100,
+                          filled: true,
+                          hintText: "Email",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          )),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    TextField(
+                      style: const TextStyle(),
+                      decoration: InputDecoration(
+                          fillColor: Colors.grey.shade100,
+                          filled: true,
+                          hintText: "Password",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          )),
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const DashboardView()),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.white,
+                            backgroundColor:
+                                Colors.black, // Set the text color
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 16.0,
+                                horizontal: 30.0), // Set the button padding
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  100.0), // Set the button border radius
+                            ),
                           ),
-                          const SizedBox(
-                            height: 30,
+                          child: const Text('Sign In '),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                           
+                          },
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.white,
+                            backgroundColor:
+                                Colors.black, // Set the text color
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 16.0,
+                                horizontal: 10.0), // Set the button padding
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  100.0), // Set the button border radius
+                            ),
                           ),
-                          TextField(
-                            style: const TextStyle(),
-                            decoration: InputDecoration(
-                                fillColor: Colors.grey.shade100,
-                                filled: true,
-                                hintText: "Password",
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                )),
-                          ),
-                          const SizedBox(
-                            height: 40,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const DashboardView()),
-                                  );
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  foregroundColor: Colors.white,
-                                  backgroundColor:
-                                      Colors.black, // Set the text color
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 16.0,
-                                      horizontal:
-                                          30.0), // Set the button padding
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        8.0), // Set the button border radius
-                                  ),
-                                ),
-                                child: const Text('Sign In '),
+                          child: const Text('Create New Account'),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TextButton(
+                            onPressed: () {},
+                            child: const Text(
+                              'Forgot Password ?',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
                               ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const MyRegister()),
-                                  );
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  foregroundColor: Colors.white,
-                                  backgroundColor:
-                                      Colors.black, // Set the text color
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 16.0,
-                                      horizontal:
-                                          10.0), // Set the button padding
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        8.0), // Set the button border radius
-                                  ),
-                                ),
-                                child: const Text('Create New Account'),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 40,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              TextButton(
-                                  onPressed: () {},
-                                  child: const Text(
-                                    'Forgot Password ?',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                    ),
-                                  )),
-                            ],
-                          )
-                        ],
-                      ),
+                            )),
+                      ],
                     )
                   ],
                 ),

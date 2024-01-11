@@ -4,8 +4,8 @@ import 'package:fruit_ordering_app/core/app.dart';
 import 'package:fruit_ordering_app/core/network/hive_service.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await HiveService().init();
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await HiveService().init();
   runApp(
     const ProviderScope(
       child: App(),

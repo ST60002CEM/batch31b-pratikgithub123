@@ -24,12 +24,10 @@ class AuthRemoteDataSource {
         data: {
           "fullname": apiModel.fullname,
           "location": apiModel.location,
-          "phonemun": apiModel.phonenum,
-          "username": apiModel.username,
+          "phonenum": apiModel.phonenum,
+          "email": apiModel.email,
           "password": apiModel.password,
         },
-
-        
       );
       if (response.statusCode == 200) {
         return const Right(true);
@@ -52,14 +50,14 @@ class AuthRemoteDataSource {
   }
 
   Future<Either<Failure, bool>> loginUser(
-    String username,
+    String email,
     String password,
   ) async {
     try {
       Response response = await dio.post(
         ApiEndpoints.login,
         data: {
-          "username": username,
+          "email": email,
           "password": password,
         },
       );
