@@ -35,28 +35,26 @@ class _MyRegisterState extends ConsumerState<MyRegister> {
             color: Colors.red);
       } else if (isConnected == ConnectivityStatus.isConnected) {
         showSnackBar(
-            message: 'Wifi Connected', context: context, color: Colors.red);
+            message: 'You are online', context: context, color: Colors.red);
       }
 
       if (ref.watch(authViewModelProvider).showMessage!) {
-        showSnackBar(message: 'User Registerd Successfully', context: context);
+        showSnackBar(
+            message: 'Student Registerd Successfully', context: context);
         ref.read(authViewModelProvider.notifier).resetMessage(false);
       }
     });
 
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 54, 212, 244),
       appBar: AppBar(
         title: const Text('Register'),
         centerTitle: true,
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-          colors: [Colors.orange, Colors.blue],
-        )),
+      body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(15),
+            padding: const EdgeInsets.all(8),
             child: Form(
               key: _key,
               child: Column(
@@ -71,7 +69,7 @@ class _MyRegisterState extends ConsumerState<MyRegister> {
                     ),
                     validator: ((value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter Full Name';
+                        return 'Please enter Full NAme';
                       }
                       return null;
                     }),

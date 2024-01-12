@@ -32,7 +32,7 @@ class _SplashViewState extends ConsumerState<SplashView> {
                 SizedBox(
                   height: 200,
                   width: 200,
-                  child: Image.asset('assets/images/pizza.png'),
+                  child: Image.asset('assets/images/fruits.png'),
                 ),
                 const Text(
                   'Fruit Ordering System',

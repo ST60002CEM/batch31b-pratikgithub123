@@ -10,7 +10,7 @@ showSnackBar({
       content: Text(message),
       backgroundColor: color ?? Colors.red,
       duration: const Duration(seconds: 1),
-      behavior: SnackBarBehavior.floating,
+      behavior: SnackBarBehavior.fixed,
     ),
   );
 }
