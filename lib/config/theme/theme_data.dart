@@ -12,7 +12,7 @@ ThemeData getApplicationTheme() {
             fontSize: 18,
             color: Colors.white,
             fontWeight: FontWeight.w200,
-            fontFamily: 'Times'),
+            fontFamily: 'fairplay'),
       ),
     ),
   );
