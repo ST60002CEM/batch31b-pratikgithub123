@@ -12,7 +12,7 @@ class SplashView extends ConsumerStatefulWidget {
 class _SplashViewState extends ConsumerState<SplashView> {
   @override
   void initState() {
-    // Wait for 2 seconds and then navigate
+    
     Future.delayed(const Duration(seconds: 1), () {
       Navigator.pushReplacementNamed(context, AppRoute.myloginRoute);
     });
