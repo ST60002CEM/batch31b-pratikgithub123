@@ -12,7 +12,6 @@ class SplashView extends ConsumerStatefulWidget {
 class _SplashViewState extends ConsumerState<SplashView> {
   @override
   void initState() {
-    
     Future.delayed(const Duration(seconds: 1), () {
       Navigator.pushReplacementNamed(context, AppRoute.myloginRoute);
     });
