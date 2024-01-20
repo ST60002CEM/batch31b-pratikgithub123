@@ -97,7 +97,8 @@ flutter:
   fonts:
     - family: Times
       fonts:
-        - asset: assets/fonts/Times.ttf    
+        - asset: assets/fonts/Times.ttf  
+        - asset: assets/fonts/fairplay.ttf    
   
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

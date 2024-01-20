@@ -6,7 +6,7 @@ import '../failure/failure.dart';
 class AppThemePrefs {
   late SharedPreferences _sharedPreferences;
 
-  // set theme
+
   Future<Either<Failure, bool>> setTheme(bool value) async {
     try {
       _sharedPreferences = await SharedPreferences.getInstance();
@@ -17,7 +17,7 @@ class AppThemePrefs {
     }
   }
 
-  // get theme
+ 
   Future<Either<Failure, bool>> getTheme() async {
     try {
       _sharedPreferences = await SharedPreferences.getInstance();
