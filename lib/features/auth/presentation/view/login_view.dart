@@ -100,8 +100,9 @@ class _MyLoginState extends ConsumerState<MyLogin> {
                                 .read(authViewModelProvider.notifier)
                                 .loginUser(context, _usernameController.text,
                                     _passwordController.text);
+                            Navigator.pushNamed(
+                                context, AppRoute.dashboardRoute);
                           }
-                          Navigator.pushNamed(context, AppRoute.dashboardRoute);
                         },
                         style: ElevatedButton.styleFrom(
                           foregroundColor: Colors.white,
