@@ -28,7 +28,7 @@ class AuthApiModel {
 
   Map<String, dynamic> toJson() => _$AuthApiModelToJson(this);
 
-  // To entity
+  
   factory AuthApiModel.toEntity(AuthApiModel apiModel) {
     return AuthApiModel(
       userId: apiModel.userId,
@@ -42,7 +42,7 @@ class AuthApiModel {
     );
   }
 
-  // From entity
+  
   factory AuthApiModel.fromEntity(AuthEntity entity) {
     return AuthApiModel(
       userId: entity.id,

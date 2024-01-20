@@ -126,14 +126,14 @@ class _MyLoginState extends ConsumerState<MyLogin> {
                                 style: ElevatedButton.styleFrom(
                                   foregroundColor: Colors.white,
                                   backgroundColor:
-                                      Colors.black, // Set the text color
+                                      Colors.black, 
                                   padding: const EdgeInsets.symmetric(
                                       vertical: 16.0,
                                       horizontal:
-                                          30.0), // Set the button padding
+                                          30.0), 
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(
-                                        20.0), // Set the button border radius
+                                        20.0), 
                                   ),
                                 ),
                                 child: const Text('Sign In '),
