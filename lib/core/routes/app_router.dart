@@ -4,6 +4,7 @@ import 'package:fruit_ordering_app/features/home/presentation/view/bottom_naviga
 import 'package:fruit_ordering_app/features/home/presentation/view/bottom_navigation/cart_view.dart';
 import 'package:fruit_ordering_app/features/home/presentation/view/bottom_navigation/profile_view.dart';
 import 'package:fruit_ordering_app/features/home/presentation/view/home_view.dart';
+import 'package:fruit_ordering_app/features/products/presentation/view/product_view.dart';
 import 'package:fruit_ordering_app/features/splash/presentation/view/splash_view.dart';
 
 class AppRoute {
@@ -28,7 +29,7 @@ class AppRoute {
       aboutRoute: (context) => const AboutView(),
       profileRoute: (context) => const ProfileView(),
       cartRoute: (context) => const CartView(),
-      // productRoute: (context) => const ProductView(),
+      productRoute: (context) => const ProductView(),
     };
   }
 }

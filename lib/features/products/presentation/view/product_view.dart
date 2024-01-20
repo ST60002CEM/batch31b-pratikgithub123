@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:fruit_ordering_app/features/products/data/data_source/product_services.dart';
 import 'package:fruit_ordering_app/features/products/data/model/product_model.dart';
+import 'package:fruit_ordering_app/features/products/presentation/state/product_services.dart';
 
 class ProductView extends StatelessWidget {
-  final productService =
-      ProductService(baseUrl: 'http://10.0.2.2:5000/api/product/get_products');
+  final ProductService productService = ProductService(
+    baseUrl2: 'http://10.0.2.2:5000/api/product',
+  );
 
   ProductView({super.key});
 
@@ -16,7 +17,7 @@ class ProductView extends StatelessWidget {
           centerTitle: true,
           title: const Text('Product Dashboard'),
         ),
-        body: FutureBuilder(
+        body: FutureBuilder<List<Product>>(
           future: productService.getProducts(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -24,8 +25,7 @@ class ProductView extends StatelessWidget {
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else {
-              List<Product> products = snapshot.data as List<Product>;
-              
+              List<Product> products = snapshot.data!;
 
               return ListView.builder(
                 itemCount: products.length,
