@@ -43,7 +43,7 @@ class _SplashViewState extends ConsumerState<SplashView> {
             ),
             Column(children: [
               Text(
-                "Fresh Fruits at Your Fingertips!.",
+                "Fresh Fruits at Your Fingertips, Order Now.",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
