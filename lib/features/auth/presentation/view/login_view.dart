@@ -28,6 +28,10 @@ class _MyLoginState extends ConsumerState<MyLogin> {
       }
     });
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Login"),
+        centerTitle: true,
+      ),
       body: SafeArea(
         child: Form(
           key: _formKey,

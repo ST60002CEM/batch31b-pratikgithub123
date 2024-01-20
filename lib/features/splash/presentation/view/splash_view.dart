@@ -21,7 +21,9 @@ class _SplashViewState extends ConsumerState<SplashView> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Material(
+      
       child: Container(
         padding: const EdgeInsets.only(top: 100, bottom: 40),
         decoration: const BoxDecoration(
