@@ -39,8 +39,7 @@ class _MyRegisterState extends ConsumerState<MyRegister> {
       }
 
       if (ref.watch(authViewModelProvider).showMessage!) {
-        showSnackBar(
-            message: 'Student Registerd Successfully', context: context);
+        showSnackBar(message: 'User Registerd Successfully', context: context);
         ref.read(authViewModelProvider.notifier).resetMessage(false);
       }
     });
