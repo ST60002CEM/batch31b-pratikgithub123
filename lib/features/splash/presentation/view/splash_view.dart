@@ -12,8 +12,11 @@ class SplashView extends ConsumerStatefulWidget {
 class _SplashViewState extends ConsumerState<SplashView> {
   @override
   void initState() {
-    // Wait for 2 seconds and then navigate
+
     Future.delayed(const Duration(seconds: 1), () {
+
+ 
+
       Navigator.pushReplacementNamed(context, AppRoute.myloginRoute);
     });
 
@@ -22,32 +25,41 @@ class _SplashViewState extends ConsumerState<SplashView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 200,
-                  width: 200,
-                  child: Image.asset('assets/images/fruits.png'),
-                ),
-                const Text(
-                  'Fruit Ordering System',
-                  style: TextStyle(
-                    fontSize: 25,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                const CircularProgressIndicator(),
-                const SizedBox(height: 10),
-                const Text('version : 1.0.0')
-              ],
+    return Material(
+      child: Container(
+        padding: const EdgeInsets.only(top: 100, bottom: 40),
+        decoration: const BoxDecoration(
+            color: Colors.black,
+            image: DecorationImage(
+                image: AssetImage("assets/images/fruits.png"),
+                fit: BoxFit.cover,
+                opacity: 0.6)),
+        child: const Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "Fruit Shop",
+              style: TextStyle(
+                fontFamily: 'Times',
+                fontSize: 50,
+                color: Colors.white,
+              ),
             ),
-          ),
-        ],
+            Column(children: [
+              Text(
+                "Fresh Fruits at Your Fingertips, Order Now.",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontFamily: "Times",
+                    letterSpacing: 2),
+              ),
+              SizedBox(height: 120),
+              CircularProgressIndicator(),
+              SizedBox(height: 10),
+            ])
+          ],
+        ),
       ),
     );
   }

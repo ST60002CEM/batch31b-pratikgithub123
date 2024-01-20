@@ -11,10 +11,6 @@
 //     var directory = await getApplicationDocumentsDirectory();
 //     Hive.init(directory.path);
 
-//     // Register Adapters
-//     // Hive.registerAdapter(AuthHiveModelAdapter());
-
-//     // ======================== Auth Queries ========================
 
 //     Future<void> addAuth(AuthHiveModel auth) async {
 //       var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.userBox);

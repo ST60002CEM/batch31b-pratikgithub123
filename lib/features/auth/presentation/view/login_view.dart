@@ -41,7 +41,7 @@ class _MyLoginState extends ConsumerState<MyLogin> {
                     key: const ValueKey('username'),
                     controller: _usernameController,
                     decoration: const InputDecoration(
-                      fillColor: Colors.grey,
+                      fillColor: Colors.white,
                       filled: true,
                       border: OutlineInputBorder(),
                       labelText: 'Usernamee',

@@ -6,7 +6,6 @@ import 'package:fruit_ordering_app/features/splash/presentation/view/splash_view
 class AppRoute {
   AppRoute._();
 
-  // static const String dashboardRoute = '/';
   static const String splashRoute = '/';
   static const String dashboardRoute = '/dashboard';
   static const String loginRoute = '/login';
@@ -17,8 +16,7 @@ class AppRoute {
     return {
       splashRoute: (context) => const SplashView(),
       dashboardRoute: (context) => const DashboardView(),
-      myloginRoute: (context) => const MyLogin(),
-      // loginRoute: (context) => const MyLogin(),
+      loginRoute: (context) => const MyLogin(),
       registerRoute: (context) => const MyRegister(),
     };
   }
