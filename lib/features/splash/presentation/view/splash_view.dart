@@ -48,7 +48,7 @@ class _SplashViewState extends ConsumerState<SplashView> {
                     color: Colors.white,
                     fontSize: 18,
                     fontFamily: "Times",
-                    letterSpacing: 1),
+                    letterSpacing: 2),
               ),
               SizedBox(height: 120),
               CircularProgressIndicator(),
