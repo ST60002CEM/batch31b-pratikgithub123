@@ -10,7 +10,6 @@ class App extends ConsumerWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Food Ordering App',
-       
       initialRoute: AppRoute.splashRoute,
       routes: AppRoute.getApplicationRoute(),
     );

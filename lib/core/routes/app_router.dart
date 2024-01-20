@@ -10,7 +10,6 @@ class AppRoute {
   static const String dashboardRoute = '/dashboard';
   static const String loginRoute = '/login';
   static const String registerRoute = '/register';
-  static const String myloginRoute = '/mylogin';
 
   static getApplicationRoute() {
     return {
