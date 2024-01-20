@@ -46,147 +46,151 @@ class _MyRegisterState extends ConsumerState<MyRegister> {
     });
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 54, 212, 244),
       appBar: AppBar(
-        title: const Text('Register'),
+        
+        title: const Text(
+          'Register',
+          ),
         centerTitle: true,
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: Form(
-              key: _key,
-              child: Column(
-                children: [
-                  TextFormField(
-                    controller: _fullnameController,
-                    decoration: InputDecoration(
-                      fillColor: Colors.grey.shade100,
-                      filled: true,
-                      border: const OutlineInputBorder(),
-                      labelText: 'Full Name',
-                    ),
-                    validator: ((value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter Full NAme';
-                      }
-                      return null;
-                    }),
-                  ),
-                  gap,
-                  TextFormField(
-                    controller: _locationController,
-                    decoration: InputDecoration(
-                      fillColor: Colors.grey.shade100,
-                      filled: true,
-                      border: const OutlineInputBorder(),
-                      labelText: 'Location',
-                    ),
-                    validator: ((value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter location';
-                      }
-                      return null;
-                    }),
-                  ),
-                  gap,
-                  TextFormField(
-                    controller: _phonenumController,
-                    decoration: InputDecoration(
-                      fillColor: Colors.grey.shade100,
-                      filled: true,
-                      border: const OutlineInputBorder(),
-                      labelText: 'Phone Num',
-                    ),
-                    validator: ((value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter phoneNo';
-                      }
-                      return null;
-                    }),
-                  ),
-                  gap,
-                  TextFormField(
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                      fillColor: Colors.grey.shade100,
-                      filled: true,
-                      border: const OutlineInputBorder(),
-                      labelText: 'Email',
-                    ),
-                    validator: ((value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter email';
-                      }
-                      return null;
-                    }),
-                  ),
-                  gap,
-                  TextFormField(
-                    controller: _passwordController,
-                    obscureText: isObscure,
-                    decoration: InputDecoration(
-                      fillColor: Colors.grey.shade100,
-                      filled: true,
-                      border: const OutlineInputBorder(),
-                      labelText: 'Password',
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          isObscure ? Icons.visibility : Icons.visibility_off,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            isObscure = !isObscure;
-                          });
-                        },
+      body: Container(
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
+              child: Form(
+                key: _key,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: _fullnameController,
+                      decoration: InputDecoration(
+                        fillColor: Colors.grey.shade300,
+                        filled: true,
+                        border: const OutlineInputBorder(),
+                        labelText: 'Full Name',
                       ),
-                    ),
-                    validator: ((value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter password';
-                      }
-                      return null;
-                    }),
-                  ),
-                  gap,
-                  SizedBox(
-                    width: 300,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (_key.currentState!.validate()) {
-                          final entity = AuthEntity(
-                            fullname: _fullnameController.text.trim(),
-                            location: _locationController.text.trim(),
-                            phonenum: _phonenumController.text.trim(),
-                            email: _emailController.text,
-                            password: _passwordController.text,
-                          );
-                          // Register user
-                          ref
-                              .read(authViewModelProvider.notifier)
-                              .registerUser(entity);
+                      validator: ((value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter Full NAme';
                         }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        backgroundColor: Colors.black, // Set the text color
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 16.0,
-                            horizontal: 10.0), // Set the button padding
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                              100.100), // Set the button border radius
+                        return null;
+                      }),
+                    ),
+                    gap,
+                    TextFormField(
+                      controller: _locationController,
+                      decoration: InputDecoration(
+                        fillColor: Colors.grey.shade300,
+                        filled: true,
+                        border: const OutlineInputBorder(),
+                        labelText: 'Location',
+                      ),
+                      validator: ((value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter location';
+                        }
+                        return null;
+                      }),
+                    ),
+                    gap,
+                    TextFormField(
+                      controller: _phonenumController,
+                      decoration: InputDecoration(
+                        fillColor: Colors.grey.shade300,
+                        filled: true,
+                        border: const OutlineInputBorder(),
+                        labelText: 'Phone Num',
+                      ),
+                      validator: ((value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter phoneNo';
+                        }
+                        return null;
+                      }),
+                    ),
+                    gap,
+                    TextFormField(
+                      controller: _emailController,
+                      decoration: InputDecoration(
+                        fillColor: Colors.grey.shade300,
+                        filled: true,
+                        border: const OutlineInputBorder(),
+                        labelText: 'Email',
+                      ),
+                      validator: ((value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter email';
+                        }
+                        return null;
+                      }),
+                    ),
+                    gap,
+                    TextFormField(
+                      controller: _passwordController,
+                      obscureText: isObscure,
+                      decoration: InputDecoration(
+                        fillColor: Colors.grey.shade300,
+                        filled: true,
+                        border: const OutlineInputBorder(),
+                        labelText: 'Password',
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            isObscure ? Icons.visibility : Icons.visibility_off,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              isObscure = !isObscure;
+                            });
+                          },
                         ),
                       ),
-                      child: const Text('Registerr',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                          )),
+                      validator: ((value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter password';
+                        }
+                        return null;
+                      }),
                     ),
-                  ),
-                ],
+                    gap,
+                    SizedBox(
+                      width: 300,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (_key.currentState!.validate()) {
+                            final entity = AuthEntity(
+                              fullname: _fullnameController.text.trim(),
+                              location: _locationController.text.trim(),
+                              phonenum: _phonenumController.text.trim(),
+                              email: _emailController.text,
+                              password: _passwordController.text,
+                            );
+                            // Register user
+                            ref
+                                .read(authViewModelProvider.notifier)
+                                .registerUser(entity);
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: Colors.black, // Set the text color
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 16.0,
+                              horizontal: 10.0), // Set the button padding
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                100.100), // Set the button border radius
+                          ),
+                        ),
+                        child: const Text('Registerr',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                            )),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
