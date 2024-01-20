@@ -17,7 +17,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
 
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Dashboard View'),
+          title: const Text('Dashboard '),
           actions: [
             IconButton(
               onPressed: () {
@@ -37,9 +37,8 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
                 color: Colors.white,
               ),
             ),
-            Switch(value: true, onChanged: (value) {}),
           ],
         ),
-        body: const Center(child: Text('Dashboard')));
+        body: const Center(child: Text('Dashboargg')));
   }
 }
