@@ -32,7 +32,7 @@ class _MyRegisterState extends ConsumerState<MyRegister> {
         showSnackBar(
             message: 'No Internet Connection',
             context: context,
-            color: Colors.red);
+            color: Colors.green);
       } else if (isConnected == ConnectivityStatus.isConnected) {
         showSnackBar(
             message: 'You are online', context: context, color: Colors.red);
