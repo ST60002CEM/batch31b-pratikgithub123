@@ -16,7 +16,6 @@ class _MyLoginState extends ConsumerState<MyLogin> {
   final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _gap = const SizedBox(height: 10);
   bool isObscure = true;
   @override
   Widget build(BuildContext context) {
@@ -100,8 +99,9 @@ class _MyLoginState extends ConsumerState<MyLogin> {
                                 .read(authViewModelProvider.notifier)
                                 .loginUser(context, _usernameController.text,
                                     _passwordController.text);
+
+                            Navigator.pushNamed(context, AppRoute.homeRoute);
                           }
-                          Navigator.pushNamed(context, AppRoute.dashboardRoute);
                         },
                         style: ElevatedButton.styleFrom(
                           foregroundColor: Colors.white,
