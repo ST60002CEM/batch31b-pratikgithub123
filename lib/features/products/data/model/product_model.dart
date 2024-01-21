@@ -1,6 +1,6 @@
 class Product {
   final String productName;
-  final double productPrice;
+  final int productPrice;
   final String productDescription;
   final String productCategory;
   final String productImageUrl;
@@ -15,6 +15,7 @@ class Product {
     required this.createdAt,
   });
 
+  // Add a factory method to convert JSON to Product
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
       productName: json['productName'],

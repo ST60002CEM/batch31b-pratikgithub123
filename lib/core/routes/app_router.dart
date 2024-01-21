@@ -29,7 +29,7 @@ class AppRoute {
       aboutRoute: (context) => const AboutView(),
       profileRoute: (context) => const ProfileView(),
       cartRoute: (context) => const CartView(),
-      productRoute: (context) => const ProductView(),
+      productRoute: (context) => ProductView(),
     };
   }
 }

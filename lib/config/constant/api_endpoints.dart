@@ -5,7 +5,8 @@ class ApiEndpoints {
   static const Duration receiveTimeout = Duration(seconds: 1000);
 
   static const String baseUrl = 'http://10.0.2.2:5000/api/user';
-  static const String baseUrl2 = 'http://10.0.2.2:5000/api/product';
+  static const String base2Url =
+      'http://10.0.2.2:5000/api/product/get_products';
 
   //Auth Routes
   static const String login = "/login";

@@ -13,7 +13,7 @@ class HomeState {
   HomeState.initial()
       : index = 0,
         lstWidget = [
-           ProductView(),
+          ProductView(),
           const CartView(),
           const ProfileView(),
           const AboutView(),
