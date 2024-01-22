@@ -1,32 +1,29 @@
-// import 'package:fruit_ordering_app/features/auth/domain/entity/auth_entity.dart';
-// import 'package:json_annotation/json_annotation.dart';
+class Product {
+  final String productName;
+  final int productPrice;
+  final String productDescription;
+  final String productCategory;
+  final String productImageUrl;
+  final DateTime createdAt;
 
-// import 'package:equatable/equatable.dart';
-// import 'package:json_annotation/json_annotation.dart';
-// part 'product_api_model.g.dart';
+  Product({
+    required this.productName,
+    required this.productPrice,
+    required this.productDescription,
+    required this.productCategory,
+    required this.productImageUrl,
+    required this.createdAt,
+  });
 
-
-// part 'photos.g.dart'; //dart run build_runner build --delete-conflicting-outputs
-
-// @JsonSerializable()
-// class Photos extends Equatable {
-  
-//    final String? productId;
-//   final String productName;
-//   final String productPrice;
-//   final String productDescription;
-//   final String productCategory;
-//   final String? productImage;
-
-//   const Products({
-   
-//   });
-
-//   factory Photos.fromJson(Map<String, dynamic> json) => _$ProductsFromJson(json);
-
-//   Map<String, dynamic> toJson() => _$ProductsToJson(this);
-
-//   @override
-//   List<Object?> get props => [albumId, id, title, url, thumbnailUrl];
-// }
-
+  // Add a factory method to convert JSON to Product
+  factory Product.fromJson(Map<String, dynamic> json) {
+    return Product(
+      productName: json['productName'],
+      productPrice: json['productPrice'],
+      productDescription: json['productDescription'],
+      productCategory: json['productCategory'],
+      productImageUrl: json['productImageUrl'],
+      createdAt: DateTime.parse(json['createdAt']),
+    );
+  }
+}

@@ -19,15 +19,15 @@ class _HomeViewState extends ConsumerState<HomeView> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.dashboard, color: Colors.black),
+            label: 'Dashboard',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shop_two_outlined, color: Colors.black),
             label: 'Product',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_bag_outlined, color: Colors.black),
             label: 'Cart',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person, color: Colors.black),
-            label: 'Profile',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.question_answer,

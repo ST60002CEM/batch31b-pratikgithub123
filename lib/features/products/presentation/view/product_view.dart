@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:fruit_ordering_app/features/products/data/model/product_model.dart';
+import 'package:fruit_ordering_app/features/products/data/model/product_api_model.dart';
 import 'package:fruit_ordering_app/features/products/presentation/state/product_services.dart';
 
 class ProductView extends StatefulWidget {
-  final productService = ProductService(
-      baseUrl2: 'http://localhost:5000/api/product/get_products');
+  final productService =
+      ProductService(baseUrl2: 'http://10.0.2.2:5000/api/product/get_products');
 
   ProductView({super.key});
 
@@ -33,7 +33,7 @@ class _ProductViewState extends State<ProductView> {
   void _scrollListener() {
     if (_scrollController.position.pixels ==
         _scrollController.position.maxScrollExtent) {
-      // Reached the end of the list, load more products
+      // load more products
       _loadProducts();
     }
   }
@@ -46,7 +46,6 @@ class _ProductViewState extends State<ProductView> {
 
       final newProducts = await widget.productService.getProducts();
 
-      // Append new products to the existing list
       products.addAll(newProducts);
 
       setState(() {
@@ -79,7 +78,6 @@ class _ProductViewState extends State<ProductView> {
             IconButton(
               icon: const Icon(Icons.refresh),
               onPressed: () {
-                // Refresh button tapped
                 _refreshProducts();
               },
             ),
@@ -110,7 +108,7 @@ class _ProductViewState extends State<ProductView> {
                 // Display a loading indicator while loading more products
                 return const Center(child: CircularProgressIndicator());
               } else {
-                // Reached the end of the list and no more products to load
+                // no more products to load
                 return const SizedBox();
               }
             },
@@ -139,7 +137,6 @@ class ProductDetailPage extends StatelessWidget {
           Text('Name: ${product.productName}'),
           Text('Price: \$${product.productPrice}'),
           Text('Description: ${product.productDescription}'),
-          // Add more details as needed
         ],
       ),
     );
