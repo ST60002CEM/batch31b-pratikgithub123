@@ -4,42 +4,107 @@ import 'package:fruit_ordering_app/core/common/snackbar/my_snackbar.dart';
 import 'package:fruit_ordering_app/features/home/presentation/view_model/home_view_model.dart';
 
 class DashboardView extends ConsumerStatefulWidget {
-  const DashboardView({super.key});
+  const DashboardView({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<DashboardView> createState() => _DashboardViewState();
+  _DashboardViewState createState() => _DashboardViewState();
 }
 
 class _DashboardViewState extends ConsumerState<DashboardView> {
+  TextEditingController searchController = TextEditingController();
+  List<String> searchResults = [];
+
   @override
   Widget build(BuildContext context) {
     final homeState = ref.watch(homeViewModelProvider);
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Dashboard View'),
-          actions: [
-            IconButton(
-              onPressed: () {
-                showSnackBar(message: 'Refressing...', context: context);
-              },
-              icon: const Icon(
-                Icons.refresh,
-                color: Colors.white,
-              ),
+      appBar: AppBar(
+        title: const Text('Dashboard'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              showSnackBar(message: 'Refreshing...', context: context);
+            },
+            icon: const Icon(
+              Icons.refresh,
+              color: Colors.white,
             ),
-            IconButton(
-              onPressed: () {
-                ref.read(homeViewModelProvider.notifier).signOut(context);
-              },
-              icon: const Icon(
-                Icons.logout,
-                color: Colors.white,
-              ),
+          ),
+          IconButton(
+            onPressed: () {
+              ref.read(homeViewModelProvider.notifier).signOut(context);
+            },
+            icon: const Icon(
+              Icons.logout,
+              color: Colors.white,
             ),
-            Switch(value: true, onChanged: (value) {}),
-          ],
-        ),
-        body: const Center(child: Text('Dashboard')));
+          ),
+          IconButton(
+            onPressed: () {
+              // Perform search or show search UI
+              showSearch(
+                context: context,
+                delegate: _CustomSearchDelegate(),
+              );
+            },
+            icon: const Icon(
+              Icons.search,
+              color: Colors.white,
+            ),
+          ),
+        ],
+      ),
+     
+    );
+  }
+
+  void _onSearchChanged(String query) {
+    // Replace with your actual search logic
+    setState(() {
+      searchResults = ['Result 1', 'Result 2', 'Result 3']
+          .where((result) => result.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    });
+  }
+}
+
+class _CustomSearchDelegate extends SearchDelegate<String> {
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+        onPressed: () {
+          query = '';
+        },
+        icon: const Icon(Icons.clear),
+      ),
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      onPressed: () {
+        close(context, '');
+      },
+      icon: const Icon(Icons.arrow_back),
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    // Implement your search results UI here
+    return Center(
+      child: Text('Search results for: $query'),
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    // Implement your search suggestions UI here
+    return Center(
+      child: Text('Search suggestions for: $query'),
+    );
   }
 }

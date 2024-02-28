@@ -15,6 +15,7 @@ class Product {
     required this.createdAt,
   });
 
+ 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
       productName: json['productName'],

@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fruit_ordering_app/core/failure/failure.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 final userSharedPrefsProvider = Provider<UserSharedPrefs>((ref) {
   return UserSharedPrefs();
 });

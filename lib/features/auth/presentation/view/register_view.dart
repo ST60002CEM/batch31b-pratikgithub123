@@ -28,29 +28,17 @@ class _MyRegisterState extends ConsumerState<MyRegister> {
 
     final isConnected = ref.watch(connectivityStatusProvider);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (isConnected == ConnectivityStatus.isDisconnected) {
-        showSnackBar(
-            message: 'No Internet Connection',
-            context: context,
-            color: Colors.green);
-      } else if (isConnected == ConnectivityStatus.isConnected) {
-        showSnackBar(
-            message: 'You are online', context: context, color: Colors.red);
-      }
-
       if (ref.watch(authViewModelProvider).showMessage!) {
-        showSnackBar(
-            message: 'Student Registerd Successfully', context: context);
+        showSnackBar(message: 'Registration success', context: context);
         ref.read(authViewModelProvider.notifier).resetMessage(false);
       }
     });
 
     return Scaffold(
       appBar: AppBar(
-        
         title: const Text(
           'Register',
-          ),
+        ),
         centerTitle: true,
       ),
       body: Container(

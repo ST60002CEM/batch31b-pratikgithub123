@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
-import 'package:fruit_ordering_app/features/home/presentation/view/bottom_navigation/about_view.dart';
-import 'package:fruit_ordering_app/features/home/presentation/view/bottom_navigation/cart_view.dart';
+
+
 import 'package:fruit_ordering_app/features/home/presentation/view/bottom_navigation/dashboard.dart';
-import 'package:fruit_ordering_app/features/home/presentation/view/bottom_navigation/profile_view.dart';
+import 'package:fruit_ordering_app/features/products/presentation/view/product_view.dart';
 
 class HomeState {
   int index;
@@ -14,9 +14,8 @@ class HomeState {
       : index = 0,
         lstWidget = [
           const DashboardView(),
-          const ProfileView(),
-          const CartView(),
-          const AboutView(),
+          ProductView(),
+         
         ];
 
   HomeState copywith({
