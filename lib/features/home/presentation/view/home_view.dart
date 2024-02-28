@@ -26,8 +26,13 @@ class _HomeViewState extends ConsumerState<HomeView> {
             label: 'Product',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_2, color: Color.fromARGB(255, 66, 50, 50)),
-            label: 'Profile',
+
+            
+
+            icon: Icon(Icons.question_answer,
+                color: Color.fromARGB(255, 66, 50, 50)),
+            label: 'About',
+
           ),
         ],
         currentIndex: homeState.index,

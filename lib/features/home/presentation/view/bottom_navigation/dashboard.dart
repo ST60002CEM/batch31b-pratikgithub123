@@ -4,7 +4,7 @@ import 'package:fruit_ordering_app/core/common/snackbar/my_snackbar.dart';
 import 'package:fruit_ordering_app/features/home/presentation/view_model/home_view_model.dart';
 
 class DashboardView extends ConsumerStatefulWidget {
-  const DashboardView({Key? key}) : super(key: key);
+  const DashboardView({super.key});
 
   @override
   _DashboardViewState createState() => _DashboardViewState();
@@ -55,7 +55,6 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
           ),
         ],
       ),
-     
     );
   }
 
