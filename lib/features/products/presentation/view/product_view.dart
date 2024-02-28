@@ -6,7 +6,7 @@ class ProductView extends StatefulWidget {
   final productService =
       ProductService(baseUrl2: 'http://10.0.2.2:5000/api/product/get_products');
 
-  ProductView({super.key});
+  ProductView({Key? key}) : super(key: key);
 
   @override
   _ProductViewState createState() => _ProductViewState();
@@ -90,25 +90,37 @@ class _ProductViewState extends State<ProductView> {
             itemCount: products.length + 1,
             itemBuilder: (context, index) {
               if (index < products.length) {
-                return ListTile(
-                  title: Text(products[index].productName),
-                  subtitle: Text(products[index].productDescription),
+                return InkWell(
                   onTap: () {
+                   
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => ProductDetailPage(
                           product: products[index],
+                          onAddToCart: () {
+                            
+                          },
                         ),
                       ),
                     );
                   },
+                  child: ListTile(
+                    title: Text(products[index].productName),
+                    subtitle: Text(products[index].productDescription),
+                    leading: Image.network(
+                      products[index].productImageUrl,
+                      width: 50,
+                      height: 50,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 );
               } else if (isLoading) {
-                // Display a loading indicator while loading more products
+                
                 return const Center(child: CircularProgressIndicator());
               } else {
-                // no more products to load
+                // No more products to load
                 return const SizedBox();
               }
             },
@@ -121,8 +133,13 @@ class _ProductViewState extends State<ProductView> {
 
 class ProductDetailPage extends StatelessWidget {
   final Product product;
+  final VoidCallback onAddToCart;
 
-  const ProductDetailPage({super.key, required this.product});
+  const ProductDetailPage({
+    Key? key,
+    required this.product,
+    required this.onAddToCart,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -135,8 +152,12 @@ class ProductDetailPage extends StatelessWidget {
         children: [
           Image.network(product.productImageUrl),
           Text('Name: ${product.productName}'),
-          Text('Price: \$${product.productPrice}'),
+          Text('Price: \RS${product.productPrice}'),
           Text('Description: ${product.productDescription}'),
+          ElevatedButton(
+            onPressed: onAddToCart,
+            child: Text('Add to Cart'),
+          ),
         ],
       ),
     );
