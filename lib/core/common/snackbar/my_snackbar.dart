@@ -8,7 +8,7 @@ showSnackBar({
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: Text(message),
-      backgroundColor: color ?? Colors.red,
+      backgroundColor: color ?? Colors.green,
       duration: const Duration(seconds: 1),
       behavior: SnackBarBehavior.fixed,
     ),

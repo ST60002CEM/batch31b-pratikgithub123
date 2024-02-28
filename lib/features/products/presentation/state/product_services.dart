@@ -14,7 +14,7 @@ class ProductService {
     if (response.statusCode == 200) {
       final Map<String, dynamic> responseData = json.decode(response.body);
 
-      // Assuming that the products are nested under a key 'products'
+      
       final List<dynamic> productList = responseData['products'];
 
       return productList.map((json) => Product.fromJson(json)).toList();

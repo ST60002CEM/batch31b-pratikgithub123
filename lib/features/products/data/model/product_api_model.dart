@@ -15,7 +15,7 @@ class Product {
     required this.createdAt,
   });
 
-  // Add a factory method to convert JSON to Product
+ 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
       productName: json['productName'],
