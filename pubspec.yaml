@@ -56,6 +56,8 @@ dependencies:
   watch_connectivity: ^0.1.6
   http_api: ^0.10.0-dev.2
   http: ^1.2.0
+  mockito: ^5.4.4
+  test_cov_console: ^0.2.2
 
 dev_dependencies:
   flutter_test:

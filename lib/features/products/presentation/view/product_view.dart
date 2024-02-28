@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:fruit_ordering_app/features/products/data/model/product_model.dart';
+import 'package:fruit_ordering_app/features/products/data/model/product_api_model.dart';
 import 'package:fruit_ordering_app/features/products/presentation/state/product_services.dart';
+import 'package:fruit_ordering_app/features/products/presentation/view/productdetail_view.dart';
 
 class ProductView extends StatefulWidget {
-  final productService = ProductService(
-      baseUrl2: 'http://localhost:5000/api/product/get_products');
+  final productService =
+      ProductService(baseUrl2: 'http://10.0.2.2:5000/api/product/get_products');
 
-  ProductView({super.key});
+  ProductView({Key? key}) : super(key: key);
 
   @override
   _ProductViewState createState() => _ProductViewState();
@@ -16,6 +17,8 @@ class _ProductViewState extends State<ProductView> {
   final ScrollController _scrollController = ScrollController();
   List<Product> products = [];
   bool isLoading = false;
+  bool hasMoreProducts = true;
+  String selectedSort = 'Name (A-Z)'; // Default sorting
 
   @override
   void initState() {
@@ -33,21 +36,26 @@ class _ProductViewState extends State<ProductView> {
   void _scrollListener() {
     if (_scrollController.position.pixels ==
         _scrollController.position.maxScrollExtent) {
-      // Reached the end of the list, load more products
-      _loadProducts();
+      // Remove this call from here
+      // _loadProducts();
     }
   }
 
   Future<void> _loadProducts() async {
-    if (!isLoading) {
+    if (!isLoading && hasMoreProducts) {
       setState(() {
         isLoading = true;
       });
 
       final newProducts = await widget.productService.getProducts();
 
-      // Append new products to the existing list
-      products.addAll(newProducts);
+      if (newProducts.isEmpty) {
+        hasMoreProducts = false;
+      } else {
+        products.addAll(newProducts);
+      }
+
+      _sortProducts(); // Sort the products after loading
 
       setState(() {
         isLoading = false;
@@ -59,13 +67,65 @@ class _ProductViewState extends State<ProductView> {
     setState(() {
       isLoading = true;
       products = [];
+      hasMoreProducts = true;
     });
 
+    // Keep the load products call only here
     await _loadProducts();
 
     setState(() {
       isLoading = false;
     });
+  }
+
+  void _sortProducts() {
+    switch (selectedSort) {
+      case 'Name (A-Z)':
+        products.sort((a, b) => a.productName.compareTo(b.productName));
+        break;
+      case 'Name (Z-A)':
+        products.sort((a, b) => b.productName.compareTo(a.productName));
+        break;
+      case 'Price (Low-High)':
+        products.sort((a, b) => a.productPrice.compareTo(b.productPrice));
+        break;
+      case 'Price (High-Low)':
+        products.sort((a, b) => b.productPrice.compareTo(a.productPrice));
+        break;
+    }
+  }
+
+  Widget _buildSortDropdown() {
+    return Container(
+      padding: EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Text('Sort By: '),
+          SizedBox(width: 8.0),
+          DropdownButton<String>(
+            value: selectedSort,
+            onChanged: (String? newValue) {
+              setState(() {
+                selectedSort = newValue!;
+                _sortProducts();
+              });
+            },
+            items: <String>[
+              'Name (A-Z)',
+              'Name (Z-A)',
+              'Price (Low-High)',
+              'Price (High-Low)',
+            ].map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -79,68 +139,90 @@ class _ProductViewState extends State<ProductView> {
             IconButton(
               icon: const Icon(Icons.refresh),
               onPressed: () {
-                // Refresh button tapped
                 _refreshProducts();
               },
             ),
           ],
         ),
-        body: RefreshIndicator(
-          onRefresh: _refreshProducts,
-          child: ListView.builder(
-            controller: _scrollController,
-            itemCount: products.length + 1,
-            itemBuilder: (context, index) {
-              if (index < products.length) {
-                return ListTile(
-                  title: Text(products[index].productName),
-                  subtitle: Text(products[index].productDescription),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProductDetailPage(
-                          product: products[index],
+        body: Column(
+          children: [
+            _buildSortDropdown(),
+            Expanded(
+              child: RefreshIndicator(
+                onRefresh: _refreshProducts,
+                child: GridView.builder(
+                  controller: _scrollController,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 8.0,
+                    mainAxisSpacing: 8.0,
+                  ),
+                  itemCount: products.length + (isLoading ? 1 : 0),
+                  itemBuilder: (context, index) {
+                    if (index < products.length) {
+                      return InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ProductDetailPage(
+                                product: products[index],
+                                onAddToCart: () {},
+                              ),
+                            ),
+                          );
+                        },
+                        child: Card(
+                          elevation: 2.0,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Image.network(
+                                  products[index].productImageUrl,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      products[index].productName,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
+                                    Text(
+                                      '\RS${products[index].productPrice}',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14.0,
+                                        color: Colors.green,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    );
+                      );
+                    } else if (isLoading) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else {
+                      return Center(
+                        child: Text('No more products'),
+                      );
+                    }
                   },
-                );
-              } else if (isLoading) {
-                // Display a loading indicator while loading more products
-                return const Center(child: CircularProgressIndicator());
-              } else {
-                // Reached the end of the list and no more products to load
-                return const SizedBox();
-              }
-            },
-          ),
+                ),
+              ),
+            ),
+          ],
         ),
-      ),
-    );
-  }
-}
-
-class ProductDetailPage extends StatelessWidget {
-  final Product product;
-
-  const ProductDetailPage({super.key, required this.product});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Product Detail'),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image.network(product.productImageUrl),
-          Text('Name: ${product.productName}'),
-          Text('Price: \$${product.productPrice}'),
-          Text('Description: ${product.productDescription}'),
-          // Add more details as needed
-        ],
       ),
     );
   }

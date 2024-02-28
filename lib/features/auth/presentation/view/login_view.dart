@@ -14,15 +14,23 @@ class MyLogin extends ConsumerStatefulWidget {
 
 class _MyLoginState extends ConsumerState<MyLogin> {
   final _formKey = GlobalKey<FormState>();
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final _usernameController = TextEditingController(text: "qwe");
+  final _passwordController = TextEditingController(text: "qwe");
   bool isObscure = true;
   @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authViewModelProvider);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (authState.showMessage! && authState.error != null) {
-        showSnackBar(message: 'Invalid Credentials', context: context);
+        if (authState.error == 'Invalid credentials') {
+          showSnackBar(message: 'Invalid Credentials', context: context);
+        } else if (authState.error == null) {
+          // Login success, show a "Login Success" Snackbar
+          showSnackBar(message: 'Login Success', context: context);
+        } else {
+          // Show a generic error message for other errors
+          showSnackBar(message: 'An error occurred', context: context);
+        }
         ref.read(authViewModelProvider.notifier).resetMessage(false);
       }
     });

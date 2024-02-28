@@ -45,7 +45,7 @@ class AppTheme {
             fontSize: 15,
           ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(20),
           ),
         ),
       ),
@@ -64,13 +64,13 @@ class AppTheme {
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: ThemeConstant.primaryColor,
+            color: Color.fromARGB(255, 171, 0, 244),
           ),
         ),
       ),
       // Circular progress bar theme
       progressIndicatorTheme: const ProgressIndicatorThemeData(
-        color: ThemeConstant.primaryColor,
+        color: Color.fromARGB(255, 107, 133, 2),
       ),
       //Bottom navigation bar theme
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(

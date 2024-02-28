@@ -5,9 +5,6 @@
 // import 'package:fruit_ordering_app/core/failure/failure.dart';
 // import 'package:fruit_ordering_app/core/network/http_service.dart';
 
-
-
-
 // final productDataSourceProvider = Provider<ProductDataSource>((ref) {
 //   final dio = ref.read(httpServiceProvider);
 //   return ProductDataSource(dio);
@@ -18,7 +15,7 @@
 //   ProductDataSource(this._dio);
 
 //   // get data from post with pagination
-//   Future<Either<Failure, List<product>>> getProducts(int page) async {
+//   Future<Either<Failure, List<Products>>> getProducts(int page) async {
 //     try {
 //       final response = await _dio.get(
 //         ApiEndpoints.product,
