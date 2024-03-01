@@ -1,6 +1,6 @@
 import 'package:fruit_ordering_app/features/auth/presentation/view/login_view.dart';
 import 'package:fruit_ordering_app/features/auth/presentation/view/register_view.dart';
-import 'package:fruit_ordering_app/features/home/presentation/view/bottom_navigation/profile_view.dart';
+
 import 'package:fruit_ordering_app/features/home/presentation/view/home_view.dart';
 import 'package:fruit_ordering_app/features/products/presentation/view/product_view.dart';
 import 'package:fruit_ordering_app/features/splash/presentation/view/splash_view.dart';
@@ -24,7 +24,6 @@ class AppRoute {
       homeRoute: (context) => const HomeView(),
       loginRoute: (context) => const MyLogin(),
       registerRoute: (context) => const MyRegister(),
-      profileRoute: (context) => const ProfileView(),
       productRoute: (context) => ProductView(),
     };
   }

@@ -41,21 +41,41 @@ class _MyLoginState extends ConsumerState<MyLogin> {
       ),
       body: SafeArea(
         child: Form(
-          key: _formKey,
-          child: Center(
-            child: SingleChildScrollView(
-                child: Padding(
-              padding: const EdgeInsets.all(8),
+            key: _formKey,
+            child: Padding(
+              padding: EdgeInsets.all(8),
               child: Column(
                 children: [
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        child: CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 80,
+                            child: Icon(
+                              Icons.lock,
+                              size: 150,
+                              color: Colors.black,
+                            )),
+                      ),
+                      Text('Welcome Back')
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
                   TextFormField(
-                    key: const ValueKey('username'),
+                    key: ValueKey('Email'),
                     controller: _usernameController,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.email),
                       fillColor: Colors.white,
                       filled: true,
                       border: OutlineInputBorder(),
-                      labelText: 'Usernamee',
+                      labelText: 'email',
                     ),
                     validator: (value) {
                       if (value!.isEmpty) {
@@ -72,6 +92,7 @@ class _MyLoginState extends ConsumerState<MyLogin> {
                     controller: _passwordController,
                     obscureText: isObscure,
                     decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.lock),
                       fillColor: Colors.white,
                       filled: true,
                       border: const OutlineInputBorder(),
@@ -94,81 +115,59 @@ class _MyLoginState extends ConsumerState<MyLogin> {
                       return null;
                     }),
                   ),
-                  const SizedBox(
-                    height: 40,
+                  SizedBox(
+                    height: 20,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            await ref
-                                .read(authViewModelProvider.notifier)
-                                .loginUser(context, _usernameController.text,
-                                    _passwordController.text);
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          await ref
+                              .read(authViewModelProvider.notifier)
+                              .loginUser(context, _usernameController.text,
+                                  _passwordController.text);
 
-                            Navigator.pushNamed(context, AppRoute.homeRoute);
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          backgroundColor: Colors.black, // Set the text color
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 16.0,
-                              horizontal: 30.0), // Set the button padding
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                20.0), // Set the button border radius
-                          ),
+                          Navigator.pushNamed(context, AppRoute.homeRoute);
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.black, // Set the text color
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 16.0,
+                            horizontal: 30.0), // Set the button padding
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                              20.0), // Set the button border radius
                         ),
-                        child: const Text('Sign In '),
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
+                      child: const Text(
+                        'Sign In ',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const MyRegister()),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          backgroundColor: Colors.black, // Set the text color
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 16.0,
-                              horizontal: 30.0), // Set the button padding
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                20.0), // Set the button border radius
-                          ),
-                        ),
-                        child: const Text('Create New Account'),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            'Forgot Password ?',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18,
-                            ),
-                          )),
-                    ],
-                  )
+                                builder: (context) => MyRegister()));
+                      },
+                      child: const Text(
+                        "Don't have an account ? SignUp",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
+                      ))
                 ],
               ),
             )),
-          ),
-        ),
       ),
     );
   }

@@ -12,7 +12,7 @@ class App extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       title: 'Food Ordering App',
       theme: AppTheme.getApplicationTheme(isDark: false),
-      initialRoute: AppRoute.splashRoute,
+      initialRoute: AppRoute.registerRoute,
       routes: AppRoute.getApplicationRoute(),
     );
   }
