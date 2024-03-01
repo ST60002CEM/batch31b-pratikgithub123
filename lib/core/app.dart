@@ -9,11 +9,11 @@ class App extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: 'Food Ordering App',
       theme: AppTheme.getApplicationTheme(isDark: false),
-      initialRoute: AppRoute.registerRoute,
+      initialRoute: AppRoute.homeRoute,
       routes: AppRoute.getApplicationRoute(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

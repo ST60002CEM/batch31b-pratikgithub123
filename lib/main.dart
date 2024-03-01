@@ -7,6 +7,7 @@ void main() async {
   // await HiveService().init();
   runApp(
     const ProviderScope(
+
       child: App(),
     ),
   );

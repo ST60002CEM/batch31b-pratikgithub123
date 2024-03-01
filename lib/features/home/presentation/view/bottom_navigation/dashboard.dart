@@ -24,15 +24,6 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
         actions: [
           IconButton(
             onPressed: () {
-              showSnackBar(message: 'Refreshing...', context: context);
-            },
-            icon: const Icon(
-              Icons.refresh,
-              color: Colors.white,
-            ),
-          ),
-          IconButton(
-            onPressed: () {
               ref.read(homeViewModelProvider.notifier).signOut(context);
             },
             icon: const Icon(

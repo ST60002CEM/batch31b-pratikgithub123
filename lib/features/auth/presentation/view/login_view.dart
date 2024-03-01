@@ -14,8 +14,8 @@ class MyLogin extends ConsumerStatefulWidget {
 
 class _MyLoginState extends ConsumerState<MyLogin> {
   final _formKey = GlobalKey<FormState>();
-  final _usernameController = TextEditingController(text: "qwe");
-  final _passwordController = TextEditingController(text: "qwe");
+  final _usernameController = TextEditingController(text: "user@gmail.com");
+  final _passwordController = TextEditingController(text: "00000000");
   bool isObscure = true;
   @override
   Widget build(BuildContext context) {

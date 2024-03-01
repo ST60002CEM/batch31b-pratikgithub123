@@ -66,7 +66,7 @@ class _ProductViewState extends State<ProductView> {
   Future<void> _refreshProducts() async {
     setState(() {
       isLoading = true;
-      products = [];
+      // products = [];
       hasMoreProducts = true;
     });
 
@@ -133,6 +133,7 @@ class _ProductViewState extends State<ProductView> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.amber,
           centerTitle: true,
           title: const Text('Product List'),
           actions: [
