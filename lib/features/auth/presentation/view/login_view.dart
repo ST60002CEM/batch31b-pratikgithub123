@@ -88,6 +88,8 @@ class _MyLoginState extends ConsumerState<MyLogin> {
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Please enter email';
+                        } else if (!value.contains('@')) {
+                          return '@ is missing in email';
                         }
                         return null;
                       },
