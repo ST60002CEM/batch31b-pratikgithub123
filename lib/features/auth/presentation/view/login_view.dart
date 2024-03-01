@@ -44,128 +44,144 @@ class _MyLoginState extends ConsumerState<MyLogin> {
             key: _formKey,
             child: Padding(
               padding: EdgeInsets.all(8),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        child: CircleAvatar(
-                            backgroundColor: Colors.white,
-                            radius: 80,
-                            child: Icon(
-                              Icons.lock,
-                              size: 150,
-                              color: Colors.black,
-                            )),
-                      ),
-                      Text('Welcome Back')
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                    key: ValueKey('Email'),
-                    controller: _usernameController,
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.email),
-                      fillColor: Colors.white,
-                      filled: true,
-                      border: OutlineInputBorder(),
-                      labelText: 'email',
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 20,
                     ),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter username';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  TextFormField(
-                    key: const ValueKey('password'),
-                    controller: _passwordController,
-                    obscureText: isObscure,
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.lock),
-                      fillColor: Colors.white,
-                      filled: true,
-                      border: const OutlineInputBorder(),
-                      labelText: 'Password',
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          isObscure ? Icons.visibility : Icons.visibility_off,
+                    Row(
+                      children: [
+                        Container(
+                          child: CircleAvatar(
+                              backgroundColor: Colors.white,
+                              radius: 80,
+                              child: Icon(
+                                Icons.lock,
+                                size: 130,
+                                color: Colors.black,
+                              )),
                         ),
-                        onPressed: () {
-                          setState(() {
-                            isObscure = !isObscure;
-                          });
-                        },
-                      ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          'Welcome Back \n         Please Login in!',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20),
+                        )
+                      ],
                     ),
-                    validator: ((value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter password';
-                      }
-                      return null;
-                    }),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        if (_formKey.currentState!.validate()) {
-                          await ref
-                              .read(authViewModelProvider.notifier)
-                              .loginUser(context, _usernameController.text,
-                                  _passwordController.text);
-
-                          Navigator.pushNamed(context, AppRoute.homeRoute);
+                    SizedBox(
+                      height: 50,
+                    ),
+                    TextFormField(
+                      key: ValueKey('Email'),
+                      controller: _usernameController,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.email),
+                        fillColor: Colors.white,
+                        filled: true,
+                        border: OutlineInputBorder(),
+                        labelText: 'email',
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter email';
                         }
+                        return null;
                       },
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        backgroundColor: Colors.black, // Set the text color
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 16.0,
-                            horizontal: 30.0), // Set the button padding
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                              20.0), // Set the button border radius
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    TextFormField(
+                      key: const ValueKey('password'),
+                      controller: _passwordController,
+                      obscureText: isObscure,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.lock),
+                        fillColor: Colors.white,
+                        filled: true,
+                        border: const OutlineInputBorder(),
+                        labelText: 'Password',
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            isObscure ? Icons.visibility : Icons.visibility_off,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              isObscure = !isObscure;
+                            });
+                          },
                         ),
                       ),
-                      child: const Text(
-                        'Sign In ',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                      validator: ((value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter password';
+                        }
+                        return null;
+                      }),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            await ref
+                                .read(authViewModelProvider.notifier)
+                                .loginUser(context, _usernameController.text,
+                                    _passwordController.text);
+
+                            Navigator.pushNamed(context, AppRoute.homeRoute);
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: Colors.black, // Set the text color
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 16.0,
+                              horizontal: 30.0), // Set the button padding
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                20.0), // Set the button border radius
+                          ),
+                        ),
+                        child: const Text(
+                          'Sign In ',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MyRegister()));
-                      },
-                      child: const Text(
-                        "Don't have an account ? SignUp",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
-                      ))
-                ],
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MyRegister()));
+                        },
+                        child: const Text(
+                          "Don't have an account ? SignUp",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
+                        )),
+                    Text(
+                      "Forgot Password",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
               ),
             )),
       ),

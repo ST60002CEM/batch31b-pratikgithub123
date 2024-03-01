@@ -50,7 +50,7 @@ class _MyRegisterState extends ConsumerState<MyRegister> {
             child: Column(
               children: [
                 Padding(
-                    padding: const EdgeInsets.only(top: 20),
+                    padding: const EdgeInsets.only(top: 10),
                     child: Row(
                       children: [
                         Container(
@@ -76,7 +76,7 @@ class _MyRegisterState extends ConsumerState<MyRegister> {
                       ],
                     )),
                 SizedBox(
-                  height: 30,
+                  height: 10,
                 ),
                 TextFormField(
                   controller: _fullnameController,
@@ -206,15 +206,17 @@ class _MyRegisterState extends ConsumerState<MyRegister> {
                         )),
                   ),
                 ),
-                gap,
-                GestureDetector(
-                  onTap: () {
+                TextButton(
+                  onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => MyLogin()));
                   },
                   child: Text(
                     'Already have an account ?',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Colors.black),
                   ),
                 ),
               ],
