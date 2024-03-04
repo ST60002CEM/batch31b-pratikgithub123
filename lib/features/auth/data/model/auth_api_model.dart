@@ -34,9 +34,7 @@ class AuthApiModel {
       userId: apiModel.userId,
       fullname: apiModel.fullname,
       location: apiModel.location,
-     
-      phonenum: apiModel.phonenum,
-      
+     phonenum: apiModel.phonenum,
       email: apiModel.email,
       password: apiModel.password,
     );

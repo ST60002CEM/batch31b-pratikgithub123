@@ -1,5 +1,5 @@
 // import 'package:dartz/dartz.dart';
-// import 'package:fruit_ordering_app/core/failure/failure.dart';
+// import 'package:fruit_ordering_app/core/network/failure.dart';
 // import 'package:fruit_ordering_app/core/network/hive_service.dart';
 // import 'package:fruit_ordering_app/features/auth/domain/entity/auth_entity.dart';
 

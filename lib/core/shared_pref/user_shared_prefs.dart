@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fruit_ordering_app/core/failure/failure.dart';
+import 'package:fruit_ordering_app/core/network/failure.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final userSharedPrefsProvider = Provider<UserSharedPrefs>((ref) {

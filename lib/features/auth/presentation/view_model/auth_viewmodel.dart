@@ -52,15 +52,15 @@ class AuthViewModel extends StateNotifier<AuthState> {
           SnackBar(
             backgroundColor: Colors.red, // Background color of the snackbar
             content: Text(
-              failure.error, // Display the error message from the backend
+              failure.error, 
               style: TextStyle(color: Colors.white), // Text color
             ),
-            duration: Duration(seconds: 3), // Duration to display the snackbar
+            duration: Duration(seconds: 3), 
             behavior: SnackBarBehavior
-                .floating, // Make the snackbar float above the bottom navigation bar
+                .floating, 
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(10)), // Rounded corners
+                  top: Radius.circular(10)), 
             ),
           ),
         );

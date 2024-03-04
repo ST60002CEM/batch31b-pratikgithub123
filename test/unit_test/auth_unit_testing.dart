@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fruit_ordering_app/core/failure/failure.dart';
+import 'package:fruit_ordering_app/core/network/failure.dart';
 import 'package:fruit_ordering_app/features/auth/domain/use_case/login_usecase.dart';
 import 'package:fruit_ordering_app/features/auth/domain/use_case/register_usecase.dart';
 import 'package:fruit_ordering_app/features/auth/presentation/view_model/auth_viewmodel.dart';

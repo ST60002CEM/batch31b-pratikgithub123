@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fruit_ordering_app/core/common/snackbar/my_snackbar.dart';
 import 'package:fruit_ordering_app/features/home/presentation/view_model/home_view_model.dart';
 
 class DashboardView extends ConsumerStatefulWidget {

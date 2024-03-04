@@ -9,7 +9,7 @@ import 'package:dartz/dartz.dart' as _i2;
 import 'package:flutter/foundation.dart' as _i4;
 import 'package:flutter/src/widgets/framework.dart' as _i3;
 import 'package:flutter/src/widgets/notification_listener.dart' as _i10;
-import 'package:fruit_ordering_app/core/failure/failure.dart' as _i7;
+import 'package:fruit_ordering_app/core/network/failure.dart' as _i7;
 import 'package:fruit_ordering_app/features/auth/domain/entity/auth_entity.dart'
     as _i8;
 import 'package:fruit_ordering_app/features/auth/domain/use_case/login_usecase.dart'

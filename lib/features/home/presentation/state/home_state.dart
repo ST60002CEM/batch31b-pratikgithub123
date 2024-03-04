@@ -13,7 +13,7 @@ class HomeState {
       : index = 0,
 
 
-        lstWidget = [const DashboardView(), ProductView(), ProfileView()];
+        lstWidget = [const DashboardView(), Product_View(), ProfileView()];
 
 
   HomeState copywith({

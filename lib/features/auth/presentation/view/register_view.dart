@@ -81,7 +81,7 @@ class _MyRegisterState extends ConsumerState<MyRegister> {
                 TextFormField(
                   controller: _fullnameController,
                   decoration: InputDecoration(
-                      fillColor: Colors.grey.shade300,
+                      fillColor: Colors.white,
                       filled: true,
                       border: const OutlineInputBorder(),
                       labelText: 'Full Name',
@@ -97,7 +97,7 @@ class _MyRegisterState extends ConsumerState<MyRegister> {
                 TextFormField(
                   controller: _locationController,
                   decoration: InputDecoration(
-                      fillColor: Colors.grey.shade300,
+                      fillColor: Colors.white,
                       filled: true,
                       border: const OutlineInputBorder(),
                       labelText: 'Location',
@@ -113,7 +113,7 @@ class _MyRegisterState extends ConsumerState<MyRegister> {
                 TextFormField(
                   controller: _phonenumController,
                   decoration: InputDecoration(
-                      fillColor: Colors.grey.shade300,
+                     fillColor: Colors.white,
                       filled: true,
                       border: const OutlineInputBorder(),
                       labelText: 'Phone Num',
@@ -129,7 +129,7 @@ class _MyRegisterState extends ConsumerState<MyRegister> {
                 TextFormField(
                   controller: _emailController,
                   decoration: InputDecoration(
-                      fillColor: Colors.grey.shade300,
+                      fillColor: Colors.white,
                       filled: true,
                       border: const OutlineInputBorder(),
                       labelText: 'Email',
@@ -148,7 +148,7 @@ class _MyRegisterState extends ConsumerState<MyRegister> {
                   controller: _passwordController,
                   obscureText: isObscure,
                   decoration: InputDecoration(
-                    fillColor: Colors.grey.shade300,
+                    fillColor: Colors.white,
                     filled: true,
                     border: const OutlineInputBorder(),
                     labelText: 'Password',

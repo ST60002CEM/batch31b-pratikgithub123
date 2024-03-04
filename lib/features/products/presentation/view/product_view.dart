@@ -1,207 +1,131 @@
 import 'package:flutter/material.dart';
-import 'package:fruit_ordering_app/features/products/data/model/product_api_model.dart';
-import 'package:fruit_ordering_app/features/products/presentation/state/product_services.dart';
-import 'package:fruit_ordering_app/features/products/presentation/view/productdetail_view.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fruit_ordering_app/core/routes/app_router.dart';
+import 'package:fruit_ordering_app/features/products/presentation/view_model/product_view_model.dart';
 
-class ProductView extends StatefulWidget {
-  final productService =
-      ProductService(baseUrl2: 'http://10.0.2.2:5000/api/product/get_products');
-
-  ProductView({Key? key}) : super(key: key);
+class Product_View extends ConsumerStatefulWidget {
+  const Product_View({super.key});
 
   @override
-  _ProductViewState createState() => _ProductViewState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _ProductViewState();
 }
 
-class _ProductViewState extends State<ProductView> {
-  final ScrollController _scrollController = ScrollController();
-  List<Product> products = [];
-  bool isLoading = false;
-  bool hasMoreProducts = true;
-  String selectedSort = 'Name (A-Z)'; // Default sorting
+class _ProductViewState extends ConsumerState<Product_View> {
+  final ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      ref.read(productViewModelProvider.notifier).resetState();
+    });
     super.initState();
-    _scrollController.addListener(_scrollListener);
-    _loadProducts();
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  void _scrollListener() {
-    if (_scrollController.position.pixels ==
-        _scrollController.position.maxScrollExtent) {
-      // Remove this call from here
-      // _loadProducts();
-    }
-  }
-
-  Future<void> _loadProducts() async {
-    if (!isLoading && hasMoreProducts) {
-      setState(() {
-        isLoading = true;
-      });
-
-      final newProducts = await widget.productService.getProducts();
-
-      if (newProducts.isEmpty) {
-        hasMoreProducts = false;
-      } else {
-        products.addAll(newProducts);
-      }
-
-      _sortProducts(); // Sort the products after loading
-
-      setState(() {
-        isLoading = false;
-      });
-    }
-  }
-
-  Future<void> _refreshProducts() async {
-    setState(() {
-      isLoading = true;
-      // products = [];
-      hasMoreProducts = true;
-    });
-
-    // Keep the load products call only here
-    await _loadProducts();
-
-    setState(() {
-      isLoading = false;
-    });
-  }
-
-  void _sortProducts() {
-    switch (selectedSort) {
-      case 'Name (A-Z)':
-        products.sort((a, b) => a.productName.compareTo(b.productName));
-        break;
-      case 'Name (Z-A)':
-        products.sort((a, b) => b.productName.compareTo(a.productName));
-        break;
-      case 'Price (Low-High)':
-        products.sort((a, b) => a.productPrice.compareTo(b.productPrice));
-        break;
-      case 'Price (High-Low)':
-        products.sort((a, b) => b.productPrice.compareTo(a.productPrice));
-        break;
-    }
-  }
-
-  Widget _buildSortDropdown() {
-    return Container(
-      padding: EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Text('Sort By: '),
-          SizedBox(width: 8.0),
-          DropdownButton<String>(
-            value: selectedSort,
-            onChanged: (String? newValue) {
-              setState(() {
-                selectedSort = newValue!;
-                _sortProducts();
-              });
-            },
-            items: <String>[
-              'Name (A-Z)',
-              'Name (Z-A)',
-              'Price (Low-High)',
-              'Price (High-Low)',
-            ].map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-          ),
-        ],
-      ),
-    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.amber,
-          centerTitle: true,
-          title: const Text('Product List'),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.refresh),
-              onPressed: () {
-                _refreshProducts();
-              },
+    final state = ref.watch(productViewModelProvider);
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Products'),
+        backgroundColor: Colors.black,
+        actions: [
+          TextButton.icon(
+            onPressed: () {
+              ref.read(productViewModelProvider.notifier).resetState();
+            },
+            icon: const Icon(
+              Icons.refresh,
+              color: Colors.white,
             ),
-          ],
-        ),
-        body: Column(
-          children: [
-            _buildSortDropdown(),
-            Expanded(
-              child: RefreshIndicator(
-                onRefresh: _refreshProducts,
-                child: GridView.builder(
-                  controller: _scrollController,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 8.0,
-                    mainAxisSpacing: 8.0,
-                  ),
-                  itemCount: products.length + (isLoading ? 1 : 0),
+            label: const Text(
+              'Refresh',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
+      ),
+      body: RefreshIndicator(
+        onRefresh: () async {
+          ref.read(productViewModelProvider.notifier).resetState();
+        },
+        child: Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  controller: scrollController,
+                  itemCount: state.productapimodel.length,
                   itemBuilder: (context, index) {
-                    if (index < products.length) {
-                      return InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ProductDetailPage(
-                                product: products[index],
-                                onAddToCart: () {},
-                              ),
-                            ),
-                          );
-                        },
-                        child: Card(
-                          elevation: 2.0,
+                    final product = state.productapimodel[index];
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 16.0),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                        ),
+                        elevation: 4.0,
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              AppRoute.productRoutes,
+                              arguments: product,
+                            );
+                          },
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Expanded(
+                              ClipRRect(
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(18.0),
+                                  topRight: Radius.circular(18.0),
+                                ),
                                 child: Image.network(
-                                  products[index].productImageUrl,
+                                  product.productImageUrl,
+                                  height: 200,
+                                  width: 200,
                                   fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Container(
+                                      height: 200,
+                                      color: Colors.grey.shade200,
+                                      child: const Icon(Icons.image, size: 50),
+                                    );
+                                  },
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(16.0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      products[index].productName,
-                                      style: TextStyle(
+                                      product.productName,
+                                      style: const TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 16.0,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 8.0),
+                                      child: Text(
+                                        product.productDescription.length > 100
+                                            ? '${product.productDescription.substring(0, 100)}...'
+                                            : product.productDescription,
+                                        style: const TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 16,
+                                        ),
                                       ),
                                     ),
                                     Text(
-                                      '\RS${products[index].productPrice}',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 14.0,
-                                        color: Colors.green,
+                                      '\RS${product.productPrice}',
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 18,
                                       ),
                                     ),
                                   ],
@@ -210,21 +134,38 @@ class _ProductViewState extends State<ProductView> {
                             ],
                           ),
                         ),
-                      );
-                    } else if (isLoading) {
-                      return const Center(child: CircularProgressIndicator());
-                    } else {
-                      return Center(
-                        child: Text('No more products'),
-                      );
-                    }
+                      ),
+                    );
                   },
                 ),
               ),
-            ),
-          ],
+              if (state.isLoading)
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: CircularProgressIndicator(color: Colors.black),
+                ),
+              const SizedBox(height: 10),
+            ],
+          ),
         ),
       ),
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

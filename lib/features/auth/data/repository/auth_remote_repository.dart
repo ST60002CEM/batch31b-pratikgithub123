@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fruit_ordering_app/core/failure/failure.dart';
+import 'package:fruit_ordering_app/core/network/failure.dart';
 import 'package:fruit_ordering_app/features/auth/data/data_source/auth_remote_data_source.dart';
 import 'package:fruit_ordering_app/features/auth/domain/entity/auth_entity.dart';
 import 'package:fruit_ordering_app/features/auth/domain/repository/auth_repository.dart';

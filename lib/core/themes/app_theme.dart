@@ -70,7 +70,7 @@ class AppTheme {
       ),
       // Circular progress bar theme
       progressIndicatorTheme: const ProgressIndicatorThemeData(
-        color: Color.fromARGB(255, 107, 133, 2),
+        color: Colors.black,
       ),
       //Bottom navigation bar theme
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(

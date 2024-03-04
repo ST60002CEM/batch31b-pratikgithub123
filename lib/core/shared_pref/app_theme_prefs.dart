@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../failure/failure.dart';
+import '../network/failure.dart';
 
 class AppThemePrefs {
   late SharedPreferences _sharedPreferences;

@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fruit_ordering_app/config/constant/api_endpoints.dart';
-import 'package:fruit_ordering_app/core/failure/failure.dart';
+import 'package:fruit_ordering_app/core/network/failure.dart';
 import 'package:fruit_ordering_app/core/network/http_service.dart';
 import 'package:fruit_ordering_app/core/shared_pref/user_shared_prefs.dart';
 import 'package:fruit_ordering_app/features/auth/data/model/auth_api_model.dart';
@@ -69,7 +69,7 @@ class AuthRemoteDataSource {
       } else {
         return Left(
           Failure(
-            error: response.data["message"],
+            error: response.data["success"],
             statusCode: response.statusCode.toString(),
           ),
         );
