@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fruit_ordering_app/core/common/provider/is_network_provided.dart';
@@ -24,200 +25,200 @@ class _MyRegisterState extends ConsumerState<MyRegister> {
 
   @override
   Widget build(BuildContext context) {
-    const gap = SizedBox(height: 20);
-
     final isConnected = ref.watch(connectivityStatusProvider);
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   if (ref.watch(authViewModelProvider).showMessage!) {
-    //     showSnackBar(message: 'Registration success', context: context);
-    //     ref.read(authViewModelProvider.notifier).resetMessage(false);
-    //   }
-    // });
-
     return Scaffold(
+      resizeToAvoidBottomInset: true,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text(
-          'Register',
+        elevation: 0,
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back_ios, size: 20, color: Colors.black),
         ),
-        centerTitle: true,
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8),
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 40),
+          height: MediaQuery.of(context).size.height - 50,
+          width: double.infinity,
           child: Form(
             key: _key,
             child: Column(
-              children: [
-                Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: Row(
-                      children: [
-                        Container(
-                          child: CircleAvatar(
-                            backgroundColor: Colors.white,
-                            radius: 80,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          'assets/images/fruits.png'))),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 50,
-                        ),
-                        Text(
-                          'Register Now',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
-                        )
-                      ],
-                    )),
-                SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  controller: _fullnameController,
-                  decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      filled: true,
-                      border: const OutlineInputBorder(),
-                      labelText: 'Full Name',
-                      prefixIcon: Icon(Icons.person)),
-                  validator: ((value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter Full NAme';
-                    }
-                    return null;
-                  }),
-                ),
-                gap,
-                TextFormField(
-                  controller: _locationController,
-                  decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      filled: true,
-                      border: const OutlineInputBorder(),
-                      labelText: 'Location',
-                      prefixIcon: Icon(Icons.location_city)),
-                  validator: ((value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter location';
-                    }
-                    return null;
-                  }),
-                ),
-                gap,
-                TextFormField(
-                  controller: _phonenumController,
-                  decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      filled: true,
-                      border: const OutlineInputBorder(),
-                      labelText: 'Phone Num',
-                      prefixIcon: Icon(Icons.phone)),
-                  validator: ((value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter phoneNo';
-                    }
-                    return null;
-                  }),
-                ),
-                gap,
-                TextFormField(
-                  controller: _emailController,
-                  decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      filled: true,
-                      border: const OutlineInputBorder(),
-                      labelText: 'Email',
-                      prefixIcon: Icon(Icons.email)),
-                  validator: ((value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter email';
-                    } else if (!value.contains('@')) {
-                      return '@ is missing in email';
-                    }
-                    return null;
-                  }),
-                ),
-                gap,
-                TextFormField(
-                  controller: _passwordController,
-                  obscureText: isObscure,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    filled: true,
-                    border: const OutlineInputBorder(),
-                    labelText: 'Password',
-                    prefixIcon: Icon(Icons.lock),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        isObscure ? Icons.visibility : Icons.visibility_off,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          isObscure = !isObscure;
-                        });
-                      },
-                    ),
-                  ),
-                  validator: ((value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter password';
-                    }
-                    return null;
-                  }),
-                ),
-                gap,
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (_key.currentState!.validate()) {
-                        final entity = AuthEntity(
-                          fullname: _fullnameController.text.trim(),
-                          location: _locationController.text.trim(),
-                          phonenum: _phonenumController.text.trim(),
-                          email: _emailController.text,
-                          password: _passwordController.text,
-                        );
-                        // Register user
-                        ref
-                            .read(authViewModelProvider.notifier)
-                            .registerUser(entity, context);
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.black, // Set the text color
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 16.0,
-                          horizontal: 10.0), // Set the button padding
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                            100.100), // Set the button border radius
-                      ),
-                    ),
-                    child: const Text('Register',
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    FadeInUp(
+                      duration: Duration(milliseconds: 1000),
+                      child: Text(
+                        "Sign up",
                         style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                        )),
+                            fontSize: 30, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    FadeInUp(
+                      duration: Duration(milliseconds: 1200),
+                      child: Text(
+                        "Create an account, It's free",
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.grey[700],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: <Widget>[
+                    FadeInUp(
+                      duration: Duration(milliseconds: 1200),
+                      child: _makeInput(
+                        controller: _fullnameController,
+                        label: "Full Name",
+                        icon: Icons.person,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your full name';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    FadeInUp(
+                      duration: Duration(milliseconds: 1300),
+                      child: _makeInput(
+                        controller: _locationController,
+                        label: "Location",
+                        icon: Icons.location_city,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your location';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    FadeInUp(
+                      duration: Duration(milliseconds: 1400),
+                      child: _makeInput(
+                        controller: _phonenumController,
+                        label: "Phone Number",
+                        icon: Icons.phone,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your phone number';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    FadeInUp(
+                      duration: Duration(milliseconds: 1500),
+                      child: _makeInput(
+                        controller: _emailController,
+                        label: "Email",
+                        icon: Icons.email,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your email';
+                          } else if (!value.contains('@')) {
+                            return '@ is missing in email';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    FadeInUp(
+                      duration: Duration(milliseconds: 1600),
+                      child: _makeInput(
+                        controller: _passwordController,
+                        label: "Password",
+                        icon: Icons.lock,
+                        obscureText: isObscure,
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            isObscure ? Icons.visibility : Icons.visibility_off,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              isObscure = !isObscure;
+                            });
+                          },
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your password';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                FadeInUp(
+                  duration: Duration(milliseconds: 1700),
+                  child: Container(
+                    padding: EdgeInsets.only(top: 3, left: 3),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      border: Border.all(color: Colors.black),
+                    ),
+                    child: MaterialButton(
+                      minWidth: double.infinity,
+                      height: 60,
+                      onPressed: () {
+                        if (_key.currentState!.validate()) {
+                          final entity = AuthEntity(
+                            fullname: _fullnameController.text.trim(),
+                            location: _locationController.text.trim(),
+                            phonenum: _phonenumController.text.trim(),
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                          );
+                          // Register user
+                          ref
+                              .read(authViewModelProvider.notifier)
+                              .registerUser(entity, context);
+                        }
+                      },
+                      color: Colors.greenAccent,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50)),
+                      child: Text(
+                        "Sign up",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600, fontSize: 18),
+                      ),
+                    ),
                   ),
                 ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MyLogin()));
-                  },
-                  child: Text(
-                    'Already have an account ?',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Colors.black),
+                FadeInUp(
+                  duration: Duration(milliseconds: 1800),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text("Already have an account?"),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MyLogin(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          " Login",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600, fontSize: 18),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -225,6 +226,44 @@ class _MyRegisterState extends ConsumerState<MyRegister> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _makeInput({
+    required TextEditingController controller,
+    required String label,
+    required IconData icon,
+    bool obscureText = false,
+    Widget? suffixIcon,
+    required String? Function(String?)? validator,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          label,
+          style: TextStyle(
+              fontSize: 15, fontWeight: FontWeight.w400, color: Colors.black87),
+        ),
+        SizedBox(height: 5),
+        TextFormField(
+          controller: controller,
+          obscureText: obscureText,
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey.shade400),
+            ),
+            border: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey.shade400),
+            ),
+            prefixIcon: Icon(icon),
+            suffixIcon: suffixIcon,
+          ),
+          validator: validator,
+        ),
+        SizedBox(height: 30),
+      ],
     );
   }
 }
