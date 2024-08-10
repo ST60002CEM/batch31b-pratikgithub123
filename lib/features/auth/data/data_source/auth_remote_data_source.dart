@@ -29,15 +29,12 @@ class AuthRemoteDataSource {
           "password": apiModel.password,
         },
       );
-      if (response.statusCode == 200) {
-        return const Right(true);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return Right(true);
       } else {
-        return Left(
-          Failure(
-            error: response.data["message"],
-            statusCode: response.statusCode.toString(),
-          ),
-        );
+        return Left(Failure(
+            error: response.data['message'],
+            statusCode: response.statusCode.toString()));
       }
     } on DioException catch (e) {
       return Left(
@@ -63,13 +60,13 @@ class AuthRemoteDataSource {
       );
       if (response.statusCode == 200) {
         // retrieve token
-        String token = response.data["token"];
+        final token = response.data["token"];
         await UserSharedPrefs().setUserToken(token);
         return const Right(true);
       } else {
         return Left(
           Failure(
-            error: response.data["success"],
+            error: response.data["message"],
             statusCode: response.statusCode.toString(),
           ),
         );

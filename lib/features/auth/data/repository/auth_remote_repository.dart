@@ -12,7 +12,6 @@ final authRemoteRepositoryProvider = Provider<IAuthRepository>(
     ref.read(authRemoteDataSourceProvider),
   ),
 );
-
 class AuthRemoteRepository implements IAuthRepository {
   final AuthRemoteDataSource _authRemoteDataSource;
 

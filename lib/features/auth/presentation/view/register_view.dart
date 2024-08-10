@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fruit_ordering_app/core/common/provider/is_network_provided.dart';
-import 'package:fruit_ordering_app/core/common/snackbar/my_snackbar.dart';
 import 'package:fruit_ordering_app/features/auth/domain/entity/auth_entity.dart';
 import 'package:fruit_ordering_app/features/auth/presentation/view/login_view.dart';
 import 'package:fruit_ordering_app/features/auth/presentation/view_model/auth_viewmodel.dart';
@@ -28,12 +27,12 @@ class _MyRegisterState extends ConsumerState<MyRegister> {
     const gap = SizedBox(height: 20);
 
     final isConnected = ref.watch(connectivityStatusProvider);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (ref.watch(authViewModelProvider).showMessage!) {
-        showSnackBar(message: 'Registration success', context: context);
-        ref.read(authViewModelProvider.notifier).resetMessage(false);
-      }
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   if (ref.watch(authViewModelProvider).showMessage!) {
+    //     showSnackBar(message: 'Registration success', context: context);
+    //     ref.read(authViewModelProvider.notifier).resetMessage(false);
+    //   }
+    // });
 
     return Scaffold(
       appBar: AppBar(
@@ -113,7 +112,7 @@ class _MyRegisterState extends ConsumerState<MyRegister> {
                 TextFormField(
                   controller: _phonenumController,
                   decoration: InputDecoration(
-                     fillColor: Colors.white,
+                      fillColor: Colors.white,
                       filled: true,
                       border: const OutlineInputBorder(),
                       labelText: 'Phone Num',
@@ -187,7 +186,7 @@ class _MyRegisterState extends ConsumerState<MyRegister> {
                         // Register user
                         ref
                             .read(authViewModelProvider.notifier)
-                            .registerUser(entity);
+                            .registerUser(entity, context);
                       }
                     },
                     style: ElevatedButton.styleFrom(

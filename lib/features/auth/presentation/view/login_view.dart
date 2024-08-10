@@ -20,20 +20,6 @@ class _MyLoginState extends ConsumerState<MyLogin> {
   @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authViewModelProvider);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (authState.showMessage! && authState.error != null) {
-        if (authState.error == 'Invalid credentials') {
-          showSnackBar(message: 'Invalid Credentials', context: context);
-        } else if (authState.error == null) {
-          // Login success, show a "Login Success" Snackbar
-          showSnackBar(message: 'Login Success', context: context);
-        } else {
-          // Show a generic error message for other errors
-          showSnackBar(message: 'An error occurred', context: context);
-        }
-        ref.read(authViewModelProvider.notifier).resetMessage(false);
-      }
-    });
     return Scaffold(
       appBar: AppBar(
         title: const Text("Login"),
@@ -138,7 +124,6 @@ class _MyLoginState extends ConsumerState<MyLogin> {
                                 .loginUser(context, _usernameController.text,
                                     _passwordController.text);
 
-                            Navigator.pushNamed(context, AppRoute.homeRoute);
                           }
                         },
                         style: ElevatedButton.styleFrom(

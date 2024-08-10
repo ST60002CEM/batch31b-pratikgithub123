@@ -14,6 +14,20 @@ class HomeViewModel extends StateNotifier<HomeState> {
   }
 
   void signOut(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.green, // Background color of the snackbar
+        content: Text(
+          'Log Out Successfully',
+          style: TextStyle(color: Colors.white), // Text color
+        ),
+        duration: Duration(seconds: 3),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+        ),
+      ),
+    );
     Navigator.pushReplacementNamed(context, AppRoute.loginRoute);
   }
 }

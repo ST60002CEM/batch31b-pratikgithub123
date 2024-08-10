@@ -14,5 +14,17 @@ class ApiEndpoints {
 
   static const String product = "product/get_products";
 
+
+ // Cart Routes
+  static const String getCart = "cart/get_cart";
+  static const String addToCart = "cart/add";
+  static const String updateCart = "cart/update";
+  static const String deleteFromCart = "cart/delete";
+  static const String clearCart = "cart/clear";
+
+  // Order Routes
+  static const String createOrder = "order/create";
+  static const String getUserOrders = "order/user";
+
   static const limitPage = 10;
 }

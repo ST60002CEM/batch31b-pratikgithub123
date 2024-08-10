@@ -25,7 +25,6 @@ class AppRoute {
       registerRoute: (context) => const MyRegister(),
       productRoute: (context) => const Product_View(),
       productRoutes: (context) => const Product_Detail(),
-      
     };
   }
 }
