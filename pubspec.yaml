@@ -60,6 +60,7 @@ dependencies:
   test_cov_console: ^0.2.2
   freezed: ^2.5.7
   animate_do: ^3.3.4
+  all_sensors: ^0.4.2
 
 dev_dependencies:
   flutter_test:

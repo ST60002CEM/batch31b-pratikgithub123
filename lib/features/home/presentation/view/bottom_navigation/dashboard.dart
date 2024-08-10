@@ -49,7 +49,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
   }
 
   void _onSearchChanged(String query) {
-    // Replace with your actual search logic
+   
     setState(() {
       searchResults = ['Result 1', 'Result 2', 'Result 3']
           .where((result) => result.toLowerCase().contains(query.toLowerCase()))

@@ -114,6 +114,10 @@ class _MyLoginState extends ConsumerState<MyLogin> {
                                         floatingLabelBehavior:
                                             FloatingLabelBehavior.auto,
                                         border: InputBorder.none,
+                                        prefixIcon: Icon(
+                                          Icons.email,
+                                          color: Colors.black,
+                                        ), // Icon added here
                                       ),
                                       validator: (value) {
                                         if (value!.isEmpty) {
@@ -145,11 +149,16 @@ class _MyLoginState extends ConsumerState<MyLogin> {
                                         floatingLabelBehavior:
                                             FloatingLabelBehavior.auto,
                                         border: InputBorder.none,
+                                        prefixIcon: Icon(
+                                          Icons.lock,
+                                          color: Colors.black,
+                                        ), // Icon added here
                                         suffixIcon: IconButton(
                                           icon: Icon(
                                             isObscure
                                                 ? Icons.visibility
                                                 : Icons.visibility_off,
+                                            color: Colors.black,
                                           ),
                                           onPressed: () {
                                             setState(() {
@@ -197,7 +206,9 @@ class _MyLoginState extends ConsumerState<MyLogin> {
                                 ),
                                 child: const Text(
                                   'Login',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ),
@@ -209,11 +220,11 @@ class _MyLoginState extends ConsumerState<MyLogin> {
                               "Don't have an account? SignUp",
                               style: TextStyle(
                                   color: Colors.grey,
-                                  fontSize: 18,
+                                  fontSize: 15,
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
-                          const SizedBox(height: 30),
+                          const SizedBox(height: 20),
                           FadeInUp(
                             duration: const Duration(milliseconds: 1800),
                             child: TextButton(
